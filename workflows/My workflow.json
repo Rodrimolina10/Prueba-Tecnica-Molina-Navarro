@@ -1,0 +1,87 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "soporte",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "06e5a442-8406-481f-ba12-64b88c29d778",
+      "name": "Webhook",
+      "webhookId": "7c7065b7-96f9-4728-99be-5604b93380d2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtenemos la pregunta que viene del Webhook\nconst pregunta = $input.item.json.body.pregunta;\nreturn {\n  resultado: pregunta\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "59f325e8-f6e7-4b4f-9c7b-9fd18f78af34",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"mensaje\": \"Prueba exitosa, el flujo funciona\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "98eb796d-195d-4551-a645-ac366f0bebb5",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "e117bc9d-7d86-4d37-a259-20c700fa206c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "115b5953596e8163cdae67f78ef4c04a12f143666f729ecc5a636c894085d08c"
+  },
+  "id": "oa4t2eGFxDG8u4Ot",
+  "tags": []
+}
